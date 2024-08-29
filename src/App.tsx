@@ -1,8 +1,10 @@
+import "./App.css";
+import MainLayout from "./components/layouts/MainLayout";
 function App() {
   return (
-    <>
-      <h1>React with redux</h1>
-    </>
+    <div className=" min-h-screen w-full ">
+      <MainLayout />
+    </div>
   );
 }
 
