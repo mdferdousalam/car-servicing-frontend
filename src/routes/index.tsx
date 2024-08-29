@@ -1,22 +1,27 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
+import AdminLayout from "../components/layouts/AdminLayout";
+import MainLayout from "../components/layouts/MainLayout";
+import UserDashboardLayout from "../components/layouts/UserLayout";
+import ErrorPage from "../pages/Error";
 import HomePage from "../pages/Home";
-import ServicesPage from "../pages/Services";
-import SignUpPage from "../pages/SignUp";
 import LoginPage from "../pages/Login";
 import ServiceDetailsPage from "../pages/ServiceDetails";
-import AdminLayout from "../components/layouts/AdminLayout";
-import ErrorPage from "../pages/Error";
+import ServicesPage from "../pages/Services";
+import SignUpPage from "../pages/SignUp";
 import AdminDashboardPage from "../pages/admin/AdminDashboard";
-import UserDashboardLayout from "../components/layouts/UserLayout";
 import UserDashboardPage from "../pages/users/UserDashboard";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <MainLayout />,
     errorElement: <ErrorPage></ErrorPage>,
     children: [
+      {
+        path: "/",
+        element: <App />,
+      },
       {
         index: true,
         element: <HomePage />,
@@ -24,14 +29,6 @@ export const router = createBrowserRouter([
       {
         path: "/services",
         element: <ServicesPage />,
-      },
-      {
-        path: "/signup",
-        element: <SignUpPage />,
-      },
-      {
-        path: "/login",
-        element: <LoginPage />,
       },
       {
         path: "/services",
@@ -44,12 +41,20 @@ export const router = createBrowserRouter([
     ],
   },
   {
+    path: "/signup",
+    element: <SignUpPage />,
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
+  {
     path: "/admin",
     element: <AdminLayout></AdminLayout>,
     errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
-        path: "/dashboard",
+        path: "/admin",
         element: <AdminDashboardPage></AdminDashboardPage>,
       },
     ],
@@ -60,7 +65,7 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
-        path: "/dashboard",
+        path: "/user",
         element: <UserDashboardPage></UserDashboardPage>,
       },
     ],
