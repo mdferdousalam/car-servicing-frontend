@@ -11,6 +11,7 @@ import ServicesPage from "../pages/Services";
 import SignUpPage from "../pages/SignUp";
 import AdminDashboardPage from "../pages/admin/AdminDashboard";
 import UserDashboardPage from "../pages/users/UserDashboard";
+import AboutPage from "../pages/About";
 
 export const router = createBrowserRouter([
   {
@@ -27,8 +28,8 @@ export const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "/services",
-        element: <ServicesPage />,
+        path: "/about",
+        element: <AboutPage />,
       },
       {
         path: "/services",

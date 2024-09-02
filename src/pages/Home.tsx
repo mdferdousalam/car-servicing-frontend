@@ -1,8 +1,16 @@
+import FeaturedServices from "../components/ui/home/FeaturedSection";
+import HeroSection from "../components/ui/home/HeroSection";
+import ReviewSection from "../components/ui/home/ReviewSection";
 
-export default function HomePage() {
+interface HomePageProps {
+  isLoggedIn?: boolean;
+}
+export default function HomePage({ isLoggedIn = false }: HomePageProps) {
   return (
     <>
-     <div>Home Page</div>
+      <HeroSection />
+      <FeaturedServices />
+      <ReviewSection isLoggedIn={isLoggedIn} />
     </>
   );
 }
