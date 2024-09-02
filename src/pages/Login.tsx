@@ -143,7 +143,7 @@ export default function LoginPage() {
       </Stack>
       <Box>
         New to us?{" "}
-        <Link color="teal.500" href="#">
+        <Link color="teal.500" href="/signup">
           Sign Up
         </Link>
       </Box>

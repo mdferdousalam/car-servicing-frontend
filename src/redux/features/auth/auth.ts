@@ -4,6 +4,31 @@ export interface UserResponse {
   user: object;
   token: string;
 }
+export enum Roles {
+  ADMIN = "admin",
+  USER = "user",
+  MANAGER = "manager",
+}
+
+export interface SignUpRequest {
+  username: {
+    firstName: string;
+    middleName?: string;
+    lastName: string;
+  };
+  email: string;
+  password: string;
+  role: Roles; // Assuming you have Roles enum imported
+  phone: string;
+  address: {
+    street: string;
+    city: string;
+    state: string;
+    postalCode: string;
+    country: string;
+  };
+}
+
 
 export interface LoginRequest {
   email: string;
@@ -12,7 +37,7 @@ export interface LoginRequest {
 
 const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    signUp: builder.mutation({
+    signUp: builder.mutation<UserResponse, SignUpRequest>({
       query: (data) => ({
         url: "/auth/signup",
         method: "POST",
