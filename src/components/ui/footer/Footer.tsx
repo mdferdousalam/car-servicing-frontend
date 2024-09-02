@@ -14,13 +14,14 @@ const Footer: React.FC = () => {
         maxW="7xl"
         mx="auto"
         px={4}
-        direction={{ base: "column", md: "row" }}
+        direction={{ base: "column" }}
       >
         {/* Contact Information */}
         <HStack
           spacing={6}
           color="gray.700"
           fontSize="sm"
+          py={3}
           textAlign={{ base: "center", md: "left" }}
           mb={{ base: 4, md: 0 }}
         >
