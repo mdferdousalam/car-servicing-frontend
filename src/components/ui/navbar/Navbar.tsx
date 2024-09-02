@@ -54,8 +54,8 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <Box >
-       {/* Bottom Section: Navbar Links */}
+    <Box>
+      {/* Bottom Section: Navbar Links */}
       <Flex align="center" justify="space-between" py={5} maxW="7xl" mx="auto">
         {/* Left: Logo */}
         <Box>
@@ -115,7 +115,7 @@ const Navbar: React.FC = () => {
 
         {/* Right: Search Icon and Profile Dropdown */}
         <HStack spacing={4}>
-         {/* Profile Dropdown */}
+          {/* Profile Dropdown */}
           <Menu>
             <MenuButton
               as={Button}
@@ -125,7 +125,7 @@ const Navbar: React.FC = () => {
               cursor="pointer"
               minW={0}
             >
-              <Avatar size="sm" src="/path-to-avatar.jpg" />
+              <Avatar size="sm" bg="teal.500" />
             </MenuButton>
             <MenuList>
               {user?.role === "admin" && (
