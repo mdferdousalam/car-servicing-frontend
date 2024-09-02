@@ -4,18 +4,17 @@ import {
   Button,
   Flex,
   FormControl,
-  FormHelperText,
   Heading,
   Input,
   InputGroup,
   InputLeftElement,
   InputRightElement,
-  Stack,
   Link,
+  Stack,
   useToast,
 } from "@chakra-ui/react";
 import * as React from "react";
-import { FaLock, FaUserAlt, FaPhoneAlt, FaHome } from "react-icons/fa";
+import { FaHome, FaLock, FaPhoneAlt, FaUserAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../hooks/hook";
 import {
@@ -65,20 +64,20 @@ export default function SignUpPage() {
     try {
       const userData = {
         username: {
-          firstName: formState.firstName,
-          middleName: formState.middleName,
-          lastName: formState.lastName,
+          firstName: formState.username.firstName,
+          middleName: formState.username.middleName,
+          lastName: formState.username.lastName,
         },
         email: formState.email,
         password: formState.password,
-        role: "user", // default role
+        role: Roles.USER, // default role
         phone: formState.phone,
         address: {
-          street: formState.street,
-          city: formState.city,
-          state: formState.state,
-          postalCode: formState.postalCode,
-          country: formState.country,
+          street: formState.address.street,
+          city: formState.address.city,
+          state: formState.address.state,
+          postalCode: formState.address.postalCode,
+          country: formState.address.country,
         },
       };
       const user = await signup(userData).unwrap();
