@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import logo from "../../../assets/car-washing-brand-logo.png";
+import logo from "../../../assets/car-washing-brand-logo.svg";
 import { useAppDispatch, useAppSelector } from "../../../hooks/hook";
 import {
   logout,
@@ -56,12 +56,12 @@ const Navbar: React.FC = () => {
   return (
     <Box>
       {/* Bottom Section: Navbar Links */}
-      <Flex align="center" justify="space-between" py={5} maxW="7xl" mx="auto">
+      <Flex align="center" justify="space-between" pb={5} maxW="7xl" mx="auto">
         {/* Left: Logo */}
         <Box>
           <RouterLink to="/">
             <HStack>
-              <Image src={logo} alt="Logo" height={200} width={200} />
+              <Image src={logo} alt="Logo" height={100} width={100} />
             </HStack>
           </RouterLink>
         </Box>
