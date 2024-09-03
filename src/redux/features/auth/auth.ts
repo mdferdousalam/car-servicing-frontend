@@ -1,7 +1,13 @@
 import { baseApi } from "../../api/api";
 
+export interface IUser {
+  userId: string;
+  role: string;
+  iat: number;
+  exp: number;
+};
 export interface UserResponse {
-  user: object;
+  user: IUser;
   token: string;
 }
 export enum Roles {
@@ -67,9 +73,6 @@ const authApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
-    protected: builder.mutation<{ message: string }, void>({
-      query: () => "protected",
-    }),
   }),
 });
 
@@ -78,5 +81,4 @@ export const {
   useLoginMutation,
   useGetUserByIdQuery,
   useValidAuthUserQuery,
-  useProtectedMutation,
 } = authApi;

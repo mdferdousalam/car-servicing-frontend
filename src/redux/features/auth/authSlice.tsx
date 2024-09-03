@@ -1,10 +1,11 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
+import { IUser } from "./auth";
 
 
 type AuthState = {
-  user: object | null;
+  user: IUser | null;
   token: string | null;
 };
 
@@ -16,7 +17,7 @@ const slice = createSlice({
       state,
       {
         payload: { user, token },
-      }: PayloadAction<{ user: object; token: string }>
+      }: PayloadAction<{ user: IUser; token: string }>
     ) => {
       state.user = user;
       state.token = token;
