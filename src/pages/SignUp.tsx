@@ -54,8 +54,27 @@ export default function SignUpPage() {
 
   const handleChange = ({
     target: { name, value },
-  }: React.ChangeEvent<HTMLInputElement>) =>
-    setFormState((prev) => ({ ...prev, [name]: value }));
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    const [field, subfield] = name.split(".");
+
+    setFormState((prev) => {
+      if (subfield) {
+        return {
+          ...prev,
+          [field]: {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            ...(prev[field as keyof SignUpRequest] as any),
+            [subfield]: value,
+          },
+        };
+      } else {
+        return {
+          ...prev,
+          [field]: value,
+        };
+      }
+    });
+  };
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
@@ -130,7 +149,7 @@ export default function SignUpPage() {
                     type="text"
                     placeholder="First Name"
                     onChange={handleChange}
-                    name="firstName"
+                    name="username.firstName"
                     bg="white"
                     borderColor="gray.300"
                     _focus={{ borderColor: "teal.500" }}
@@ -143,7 +162,7 @@ export default function SignUpPage() {
                   type="text"
                   placeholder="Middle Name (optional)"
                   onChange={handleChange}
-                  name="middleName"
+                  name="username.middleName"
                   bg="white"
                   borderColor="gray.300"
                   _focus={{ borderColor: "teal.500" }}
@@ -159,7 +178,7 @@ export default function SignUpPage() {
                     type="text"
                     placeholder="Last Name"
                     onChange={handleChange}
-                    name="lastName"
+                    name="username.lastName"
                     bg="white"
                     borderColor="gray.300"
                     _focus={{ borderColor: "teal.500" }}
@@ -236,7 +255,7 @@ export default function SignUpPage() {
                     type="text"
                     placeholder="Street"
                     onChange={handleChange}
-                    name="street"
+                    name="address.street"
                     bg="white"
                     borderColor="gray.300"
                     _focus={{ borderColor: "teal.500" }}
@@ -250,7 +269,7 @@ export default function SignUpPage() {
                     type="text"
                     placeholder="City"
                     onChange={handleChange}
-                    name="city"
+                    name="address.city"
                     bg="white"
                     borderColor="gray.300"
                     _focus={{ borderColor: "teal.500" }}
@@ -264,7 +283,7 @@ export default function SignUpPage() {
                     type="text"
                     placeholder="State"
                     onChange={handleChange}
-                    name="state"
+                    name="address.state"
                     bg="white"
                     borderColor="gray.300"
                     _focus={{ borderColor: "teal.500" }}
@@ -278,7 +297,7 @@ export default function SignUpPage() {
                     type="text"
                     placeholder="Postal Code"
                     onChange={handleChange}
-                    name="postalCode"
+                    name="address.postalCode"
                     bg="white"
                     borderColor="gray.300"
                     _focus={{ borderColor: "teal.500" }}
@@ -292,7 +311,7 @@ export default function SignUpPage() {
                     type="text"
                     placeholder="Country"
                     onChange={handleChange}
-                    name="country"
+                    name="address.country"
                     bg="white"
                     borderColor="gray.300"
                     _focus={{ borderColor: "teal.500" }}

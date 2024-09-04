@@ -4,7 +4,7 @@ import { RootState } from "../store";
 import { logout, setCredentials } from "../features/auth/authSlice";
 
 const  baseQuery = fetchBaseQuery({
-    baseUrl: "http://localhost:5000",
+    baseUrl: "http://localhost:5000/api",
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
       // By default, if we have a token in the store, let's use that for authenticated requests
