@@ -13,6 +13,7 @@ import AdminDashboardPage from "../pages/admin/AdminDashboard";
 import UserDashboardPage from "../pages/users/UserDashboard";
 import AboutPage from "../pages/About";
 import BookingPage from "../pages/Booking";
+import ServiceManagement from "../pages/admin/ServiceManagement";
 
 export const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ export const router = createBrowserRouter([
       {
         path: "/admin",
         element: <AdminDashboardPage></AdminDashboardPage>,
+      },
+      {
+        path: "/admin/service-management",
+        element: <ServiceManagement></ServiceManagement>,
       },
     ],
   },
