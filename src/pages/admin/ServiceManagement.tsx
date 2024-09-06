@@ -21,6 +21,7 @@ import {
 } from "../../redux/features/service/serviceApi";
 import AddServiceModal from "./AddServiceModal";
 
+
 interface Service {
   _id: string;
   name: string;
@@ -32,13 +33,16 @@ interface Service {
 
 const ServiceManagement = () => {
   const { data: services } = useGetAllServicesQuery(undefined);
-  const [isModelOpen, setIsModelOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Corrected state name
   const [deleteService] = useDeleteServiceByIdMutation();
   const toast = useToast();
 
-  const toggleModel = () => {
-    setIsModelOpen(!isModelOpen);
-  };
+const toggleModal = () => {
+  console.log("Modal open state before:", isModalOpen); // Add this to debug
+  setIsModalOpen(!isModalOpen);
+  console.log("Modal open state after:", !isModalOpen); // Add this to debug
+};
+
 
   const handleDelete = async (id: string) => {
     if (confirm("Are you sure you want to delete this service?")) {
@@ -61,7 +65,7 @@ const ServiceManagement = () => {
           Service Management
         </Heading>
         <Button
-          onClick={toggleModel}
+          onClick={toggleModal}
           colorScheme="blue"
           bgGradient="linear(to-r, blue.500, blue.600)"
           _hover={{ bgGradient: "linear(to-r, blue.600, blue.700)" }}
@@ -69,7 +73,6 @@ const ServiceManagement = () => {
           Add Service
         </Button>
       </Flex>
-
       {/* Table with service data */}
       <Box overflowX="auto" bg="white" shadow="md" rounded="lg">
         <Table minW="max-content" variant="simple">
@@ -148,9 +151,11 @@ const ServiceManagement = () => {
           </Tbody>
         </Table>
       </Box>
-
+      {/* Simplified Modal for Debugging */}
+  
       {/* Add Service Modal */}
-      {isModelOpen && <AddServiceModal toggleModel={toggleModel} />}
+      {isModalOpen && <AddServiceModal toggleModal={toggleModal} />}{" "}
+      {/* Ensure toggleModal is passed correctly */}
     </Box>
   );
 };

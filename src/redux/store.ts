@@ -3,7 +3,7 @@ import { baseApi } from "./api/api";
 import authReducer from "./features/auth/authSlice";
 import storage from "redux-persist/lib/storage";
 import bookingReducer from "./features/booking/bookingSlice";
-import {  persistReducer} from "redux-persist";
+import {  persistReducer, persistStore} from "redux-persist";
 // Persist configuration for auth slice
 const authPersistConfig = {
   key: "auth",
@@ -35,3 +35,6 @@ export type RootState = ReturnType<typeof store.getState>
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch
 export type AppStore = typeof store
+
+// Persistor for persisting the store
+export const persistor = persistStore(store);

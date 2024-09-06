@@ -121,10 +121,23 @@ export default function LoginPage() {
                 isLoading={isLoading}
                 onClick={async () => {
                   try {
-                    const userData = { ...formState, role: "user" };
+                    const userData = { ...formState };
                     const user = await login(userData).unwrap();
-                    dispatch(setCredentials(user));
-                    navigate("/");
+                    // dispatch(setCredentials(user));
+                    console.log(user);
+                    dispatch(
+                      setCredentials({
+                        user: user.data.user,
+                        token: user.data.accessToken,
+                      })
+                    );
+
+                    // Check user role and navigate accordingly
+                    if (user.data.user.role === "admin") {
+                      navigate("/admin");
+                    } else {
+                      navigate("/user");
+                    }
                   } catch (err) {
                     console.log(err);
                     toast({

@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   Button,
   FormControl,
@@ -14,13 +13,14 @@ import {
   Textarea,
   useToast,
 } from "@chakra-ui/react";
+import React, { useState } from "react";
 import { useAddServiceMutation } from "../../redux/features/service/serviceApi";
 
 interface AddServiceModalProps {
-  toggleModel: () => void;
+  toggleModal: () => void;
 }
 
-const AddServiceModal: React.FC<AddServiceModalProps> = ({ toggleModel }) => {
+const AddServiceModal: React.FC<AddServiceModalProps> = ({ toggleModal }) => {
   const [addService] = useAddServiceMutation();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -28,7 +28,7 @@ const AddServiceModal: React.FC<AddServiceModalProps> = ({ toggleModel }) => {
   const [price, setPrice] = useState("");
   const [image, setImage] = useState<string>("");
   const toast = useToast();
-  const imgbbAPIKey = process.env.IMGBB_API_KEY;
+  const imgbbAPIKey = import.meta.env.VITE_IMGBB_API_KEY;
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
@@ -50,7 +50,7 @@ const AddServiceModal: React.FC<AddServiceModalProps> = ({ toggleModel }) => {
     reader.onloadend = async () => {
       const base64 = reader.result as string;
       const formData = new FormData();
-      formData.append("image", base64.split(",")[1]); // Remove the "data:image/jpeg;base64," part
+      formData.append("image", base64.split(",")[1]);
 
       try {
         const response = await fetch(
@@ -112,9 +112,9 @@ const AddServiceModal: React.FC<AddServiceModalProps> = ({ toggleModel }) => {
 
     try {
       await addService(service).unwrap();
-      toggleModel();
+      toggleModal();
     } catch (error) {
-        console.log(error)
+      console.log(error);
       toast({
         title: "Failed to save service",
         status: "error",
@@ -125,7 +125,7 @@ const AddServiceModal: React.FC<AddServiceModalProps> = ({ toggleModel }) => {
   };
 
   return (
-    <Modal isOpen={true} onClose={toggleModel}>
+    <Modal isOpen={true} onClose={toggleModal}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Add a Service</ModalHeader>
@@ -150,34 +150,33 @@ const AddServiceModal: React.FC<AddServiceModalProps> = ({ toggleModel }) => {
                 placeholder="Type service description..."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                resize="none"
               />
             </FormControl>
 
             <FormControl mb={4}>
-              <FormLabel htmlFor="duration">Duration</FormLabel>
+              <FormLabel htmlFor="duration">Duration (in hours)</FormLabel>
               <Input
                 id="duration"
                 type="number"
-                placeholder="Enter Service Duration (e.g., 60)"
+                placeholder="Service Duration"
                 value={duration}
                 onChange={(e) => setDuration(e.target.value)}
               />
             </FormControl>
 
             <FormControl mb={4}>
-              <FormLabel htmlFor="price">Price</FormLabel>
+              <FormLabel htmlFor="price">Price (in USD)</FormLabel>
               <Input
                 id="price"
                 type="number"
-                placeholder="Enter Price (e.g., 50)"
+                placeholder="Service Price"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
               />
             </FormControl>
 
             <FormControl mb={4}>
-              <FormLabel htmlFor="image">Image</FormLabel>
+              <FormLabel htmlFor="image">Upload Image</FormLabel>
               <Input
                 id="image"
                 type="file"
@@ -185,17 +184,14 @@ const AddServiceModal: React.FC<AddServiceModalProps> = ({ toggleModel }) => {
                 onChange={handleFileUpload}
               />
             </FormControl>
-
-            <ModalFooter>
-              <Button colorScheme="gray" onClick={toggleModel}>
-                Cancel
-              </Button>
-              <Button type="submit" colorScheme="blue" ml={3}>
-                Save
-              </Button>
-            </ModalFooter>
           </form>
         </ModalBody>
+        <ModalFooter>
+          <Button onClick={toggleModal}>Cancel</Button>
+          <Button colorScheme="blue" ml={3} onClick={handleSubmit}>
+            Save
+          </Button>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   );

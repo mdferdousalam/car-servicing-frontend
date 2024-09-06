@@ -6,10 +6,10 @@ export interface IUser {
   iat: number;
   exp: number;
 };
-export interface UserResponse {
-  user: IUser;
-  token: string;
-}
+// export interface UserResponse {
+//   user: IUser;
+//   token: string;
+// }
 export enum Roles {
   ADMIN = "admin",
   USER = "user",
@@ -43,7 +43,7 @@ export interface LoginRequest {
 
 const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    signUp: builder.mutation<UserResponse, SignUpRequest>({
+    signUp: builder.mutation({
       query: (data) => ({
         url: "/auth/signup",
         method: "POST",
@@ -51,7 +51,7 @@ const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Auth"], // Invalidate 'Auth' data after signing up
     }),
-    login: builder.mutation<UserResponse, LoginRequest>({
+    login: builder.mutation({
       query: (body) => ({
         url: "/auth/login",
         method: "POST",
